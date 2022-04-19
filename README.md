@@ -1,2 +1,3 @@
-# Cpp_and_Python
-# Cpp_and_Python
+# C++ and Python
+### Summary:
+The project is a base level inventory management reporting system. Using hard-coded values a user is able to query how many of "x" product was sold over the course of the day. You are also able able to generate a report and visualize the amount of products ordered during the day. Things that can be done to enhance this would be for it to integrate to a database for CRUD operations. This would enable dynamic updating of inventory throughout the day as items come and go from the stores supplies. The most unusal portion of this project was combining Python scripts into a C++ environment and have the .py script read and interact with it through the .cpp app.  While the applications of this in the "real world" are limited, it's something that is good to know especially when dealing with complex ad-hoc pythonic code in a production environment. This is maintainable through the use of KISS programming tactics. KISS = Keep it simple stupid :D. 

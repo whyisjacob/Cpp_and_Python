@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <cmath>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -140,6 +141,43 @@ int callIntFunc(string proc, int param)
 }
 
 
+int display_text_histogram() {
+	ifstream histogram_file;
+	string item_name;
+	string space = " ";
+	int item_qty;
+	string stars = "";
+	histogram_file.open("../Release/frequency.dat", ios::in);
+
+	//validate temp file
+	if (!histogram_file.is_open()) {
+		cout << "Could not open the output file" << endl;
+		return 1;
+	}
+
+
+	while (!histogram_file.fail()) {
+		stars = "";
+		//read values from input file
+		histogram_file >> item_name;
+		histogram_file >> item_qty;
+
+		//cout << "item_name = " << item_name << endl;
+		for (int i = 0; i < item_qty; i++) {
+			stars += "*";
+		}
+		//cout << "item_qty = " << item_qty << endl;
+		cout << item_name << space << stars<< endl;
+
+	}
+
+	histogram_file.close();
+
+
+	return 0;
+}
+
+
 void main()
 {
 	string displayMenu = "yes";
@@ -148,10 +186,10 @@ void main()
 	string specificItem;
 
 	while (displayMenu == "yes")
-	{	
+	{
 		specificItem = "";
 		cout << "\n1: Determine the number of times each individual item appears \n";
-		cout << "2: Determine the frequency of a specific item\n" ;
+		cout << "2: Determine the frequency of a specific item\n";
 		cout << "3: Graphically display a data file as a text-based histogram\n";
 		cout << "4: exit \n";
 		cin >> menuVal;
@@ -163,23 +201,30 @@ void main()
 			CallProcedure("count_grocery_items");
 
 			break;
+
+
 		case 2:
-			cout << "What item are you looking for?: ";
-			/// <summary>
-			/// TODO: Fix space infinite loop if space val passed in specificItem
-			/// </summary>
+			cout << "\nWhat item are you looking for?: ";
 			cin >> specificItem;
-			cout << "\n\nGot it!\nI'll start looking for how many times " << specificItem << " appears in our list\n";
-			//cout << param << " + " << param << " is: " << callIntFunc("DoubleValue", param) << endl;
-			cout <<"Total num of " << specificItem << " sold is: " << callIntFunc("get_specific_item", specificItem) << endl;
+
+			cout << "Got it!\nI'll start looking for how many times " << specificItem << " appears in our list\n";
+			cout << "\nTotal num of " << specificItem << " sold is: " << callIntFunc("get_specific_item", specificItem) << endl;
 			break;
+
+
 		case 3:
 			cout << "Graphically displaying how many each items appear.\n\nPlease wait...\n";
+			CallProcedure("save_sold_items_to_file");
+			display_text_histogram();
 			break;
+
+
 		case 4:
 			cout << "Closing the dadgum program";
 			displayMenu = "no";
 			break;
+
+
 		default:
 			cout << "Please enter 1, 2, 3, or 4" << endl;
 			break;

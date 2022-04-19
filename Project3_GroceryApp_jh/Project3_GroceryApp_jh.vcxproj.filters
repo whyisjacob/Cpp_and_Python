@@ -23,6 +23,9 @@
     <None Include="..\Release\PythonCode.py">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="..\Release\frequency.dat">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Release\groceries.txt">
